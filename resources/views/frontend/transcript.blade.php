@@ -14,7 +14,7 @@
             top: 0;
             background-color: black;
             color: white;
-            transform: rotate(180deg);
+            transform: scaleY(-1);
         }
 
         .home-button{

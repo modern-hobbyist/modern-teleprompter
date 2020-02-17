@@ -47,4 +47,17 @@ class HomeController extends Controller
         $contents = Storage::get($transcript->path);
         return view('frontend.transcript')->with(['transcript' => $transcript, 'contents' => $contents]);
     }
+
+    /**
+     * @param $id
+     */
+    public function delete($id)
+    {
+        $transcript = Transcript::where('id', $id)->first();
+        if($transcript){
+            $transcript->delete();
+        }
+
+        return redirect()->route('frontend.index');
+    }
 }

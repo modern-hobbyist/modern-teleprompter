@@ -16,8 +16,6 @@
             line-height: 200%;
             height: 100%;
             width: 100%;
-            left: 0;
-            top: 0;
             background-color: black;
             color: white;
             transform: scaleY(-1);
@@ -25,7 +23,7 @@
 
         .controls{
             position: fixed;
-            top: 20px;
+            bottom: 20px;
             left: 20px;
             z-index: 3;
         }

@@ -29,7 +29,6 @@
             left: 20px;
             z-index: 3;
         }
-
     </style>
 @endpush
 

@@ -7,8 +7,13 @@
         body{
             background-color: black;
             color: white;
+            line-height: 300%;
         }
         .transcript{
+            padding-top: 100vh;
+            padding-bottom: 100vh;
+            font-size: 50px;
+            line-height: 200%;
             height: 100%;
             width: 100%;
             left: 0;
@@ -139,7 +144,7 @@
 @section('content')
     <div class="row">
         <div class="transcript">
-            <h1 class="font-5xl">{{ $contents }}</h1>
+            <p>{{ $contents }}</p>
         </div>
     </div>
     <div class="controls">
@@ -157,7 +162,7 @@
                     <label for="speed" class="col m-auto">
                         Speed
                     </label>
-                    <input type="number" name="speed" id="speed" value="10" class="form-control btn-dark col" />
+                    <input type="number" name="speed" id="speed" value="1" class="form-control btn-dark col" />
                 </div>
             </div>
             <div class="col">

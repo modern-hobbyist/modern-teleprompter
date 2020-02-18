@@ -24,8 +24,9 @@
         .controls{
             position: fixed;
             bottom: 20px;
-            left: 20px;
+            left: 0;
             z-index: 3;
+            width: 100%;
         }
     </style>
 @endpush
@@ -146,30 +147,36 @@
     </div>
     <div class="controls">
         <div class="row">
-            <div class="col">
-                <button class="btn btn-dark home-button">
-                    <a href="{{route('frontend.index')}}" class="text-decoration-none">
-                        <i class="fa fa-arrow-left"></i>
-                        Home
-                    </a>
-                </button>
-            </div>
-            <div class="col">
-                <div class="form-group row">
-                    <label for="speed" class="col m-auto">
-                        Speed
-                    </label>
-                    <input type="number" name="speed" id="speed" value="1" class="form-control btn-dark col" />
+            <div class="col-10 m-auto">
+                <div class="row">
+                    <div class="col">
+                        <div class="row">
+                            <button class="btn btn-dark home-button">
+                                <a href="{{route('frontend.index')}}" class="text-decoration-none">
+                                    <i class="fa fa-arrow-left"></i>
+                                    Home
+                                </a>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group row justify-content-center">
+                            <label for="speed" class="col-form-label col-6 text-right">
+                                Speed
+                            </label>
+                            <input type="number" name="speed" id="speed" value="1" class="form-control btn-dark col" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <div class="btn-group col" role="group" aria-label="Basic example">
+                                <button name="restart" id="restart" class="btn btn-dark">Restart</button>
+                                <button name="end" id="end" class="btn btn-dark">End</button>
+                                <button name="pause" id="pause" class="btn btn-dark">Pause</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="col">
-                <button name="restart" id="restart" class="btn btn-dark">Restart</button>
-            </div>
-            <div class="col">
-                <button name="end" id="end" class="btn btn-dark">End</button>
-            </div>
-            <div class="col">
-                <button name="pause" id="pause" class="btn btn-dark">Pause</button>
             </div>
         </div>
     </div>

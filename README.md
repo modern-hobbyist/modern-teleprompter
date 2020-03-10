@@ -37,16 +37,22 @@ Sudo apt-get install php
 ```
 Sudo apt-get install php-mbstring php7.3-dom php-curl php-mysql
 ```
-  a. Y to continue
-  b. Might need to change the version of dom extension you install to match the newest version of php.
+- 1. Y to continue
+- 2. Might need to change the version of dom extension you install to match the newest version of php.
 14. Install composer
-```curl -sS https://getcomposer.org/installer | php```
-```sudo mv composer.phar /usr/local/bin/composer```
+```
+curl -sS https://getcomposer.org/installer | php
+sudo mv composer.phar /usr/local/bin/composer
+```
 15. Install mysql
-```sudo apt-get install mariadb-server mariadb-client -y```
+```
+sudo apt-get install mariadb-server mariadb-client -y
+```
 16. Enter Mysql prompt
-```Sudo mysql -u root -p```
-  a. Password: root
+```
+Sudo mysql -u root -p
+```
+- 1. Password: root
 17. Configure Mysql user
 ```
 CREATE USER 'homestead'@'localhost' IDENTIFIED BY 'secret';
@@ -58,7 +64,7 @@ Quit;
 ```
 Mysql -u homestead -p 
 ```
-  a. Password: secret
+- 1. Password: secret
 ```
 CREATE SCHEMA teleprompter;
 exit;
@@ -76,7 +82,7 @@ Git clone https://github.com/csteamengine/teleprompter.git
 ```
 Composer install
 ```
-  a. Composer update takes too much processing power and would take ages on the pi, so make sure to run this on your development machine and just do install on the pi.
+- 1. Composer update takes too much processing power and would take ages on the pi, so make sure to run this on your development machine and just do install on the pi.
 23. Create the .env file
 ```
 Cp .env.example to .env
@@ -106,17 +112,17 @@ sudo apt-get upgrade
 sudo apt-get dist-upgrade
 sudo apt-get install chromium-browser unclutter lxde
 ```
-  a. Y to continue
+- 1. Y to continue
 2. Raspi config
 ```sudo raspi-config```
 3. Boot options
-  a. Desktop/CLI
-  b. Desktop/Autologin
+- 1. Desktop/CLI
+- 2. Desktop/Autologin
 4. Edit ~/.config/lxsession/LXDE/autostart
 ```
 Sudo nano ~/.config/lxsession/LXDE/autostart
 ```
-  a. Add the following to the autostart file
+- 1. Add the following to the autostart file
 ```
 @xset s off
 @xset -dpms
@@ -124,9 +130,9 @@ Sudo nano ~/.config/lxsession/LXDE/autostart
 @sed -i 's/"exited_cleanly": false/"exited_cleanly": true/' ~/.config/chromium-browser Default/Preferences
 @chromium-browser --noerrdialogs --kiosk https://blockdev.io --incognito --disable-translate
 ```
-  b. Set it to the correct url http://YOURIPADDRESS:8000
+- 2. Set it to the correct url http://YOURIPADDRESS:8000
 5. Configure the server to startup at boot
-  a. Edit the .bash_profile with the following
+- 3. Edit the .bash_profile with the following
 ```
 (cd ~/Documents/teleprompter && php artisan serve --host=10.0.1.37 &)
 ```

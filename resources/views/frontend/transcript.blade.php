@@ -7,13 +7,13 @@
         body{
             background-color: black;
             color: white;
-            line-height: 500%;
+            line-height: 200%;
         }
         .transcript{
             padding-top: 100vh;
             padding-bottom: 100vh;
             font-size: 30px;
-            line-height: 500%;
+            line-height: 200%;
             height: 100%;
             width: 100%;
             background-color: black;

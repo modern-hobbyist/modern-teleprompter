@@ -38,7 +38,7 @@
             $('html, body').animate({scrollTop:$(document).height()}, 'slow');
             $('html, body').animate({
                 scrollTop: $(".transcript").offset().top
-            }, 310/$('#speed').val()*1500, "linear");
+            }, 310/($('#speed').val()/10)*1000, "linear");
         });
 
         function updateSpeed(){
@@ -46,7 +46,7 @@
             $('html, body').stop();
             $('html, body').animate({
                 scrollTop: $(".transcript").offset().top
-            }, 310/$('#speed').val()*1500, "linear" );
+            }, 310/($('#speed').val()/10)*1000, "linear" );
         }
 
         $('#speed').on('change', function(){
@@ -59,7 +59,7 @@
             $('html, body').animate({scrollTop:$(document).height()}, 'slow', function(){
                 $('html, body').animate({
                     scrollTop: $(".transcript").offset().top
-                }, 310/$('#speed').val()*1500, "linear" );
+                }, 310/($('#speed').val()/10)*1000, "linear" );
             });
         }
 
@@ -69,7 +69,7 @@
             });
             $('html, body').animate({
                 scrollTop: $(".transcript").offset().top
-            }, 310/$('#speed').val()*500, "linear" );
+            }, 310/($('#speed').val()/10)*1000, "linear" );
             updateSpeed();
         }
 

@@ -142,7 +142,7 @@
 @section('content')
     <div class="row">
         <div class="transcript">
-            <p>{{ $contents }}</p>
+            <p>{!! $contents !!}</p>
         </div>
     </div>
     <div class="controls">

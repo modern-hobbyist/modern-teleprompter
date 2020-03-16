@@ -7,7 +7,7 @@
         body{
             background-color: black;
             color: white;
-            line-height: 500%;
+            line-height: 1000%;
         }
         .transcript{
             padding-top: 100vh;

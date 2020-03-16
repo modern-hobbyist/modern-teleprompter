@@ -12,7 +12,7 @@
         .transcript{
             padding-top: 100vh;
             padding-bottom: 100vh;
-            font-size: 50px;
+            font-size: 30px;
             line-height: 200%;
             height: 100%;
             width: 100%;

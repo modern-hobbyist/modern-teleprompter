@@ -13,42 +13,35 @@ The case serves multiple purposes. It holds the electronics and glass panel, it 
 ## Instructions
 ### Raspberry Pi Setup
 1. Download and install Raspbian Lite
- 
-   a. Raspbian Lite: https://www.raspberrypi.org/downloads/raspbian/
- 
-   b. Installation Instructions: https://www.raspberrypi.org/documentation/installation/installing-images/README.md
+    1. Raspbian Lite: https://www.raspberrypi.org/downloads/raspbian/
+    1. Installation Instructions: https://www.raspberrypi.org/documentation/installation/installing-images/README.md
+1. Add WPA_Supplicants.conf (to automatically connect to WiFi)
+    1. With the SD card inserted into your computer, create a file called WPA_Supplicants.conf on the SD card
+    1. Add the following to WPA_Supplicants (Replace SSID and PSK with your WiFi credentials):
+    ```
+    country=us
+    update_config=1
+    ctrl_interface=/var/run/wpa_supplicant
 
-4. Add WPA_Supplicants.conf (to automatically connect to WiFi)
- 
-   a. With the SD card inserted into your computer, create a file called WPA_Supplicants.conf on the SD card
- 
-   b. Add the following to WPA_Supplicants (Replace SSID and PSK with your WiFi credentials):
-
-```
-country=us
-update_config=1
-ctrl_interface=/var/run/wpa_supplicant
-
-network={
- scan_ssid=1
- ssid="YourNetworkID"
- psk="YourPassword"
-}
-```
-5. Add extensionless ‘ssh’ file to your SD card
-- a. Create a file called `ssh` with no extension on your SD card
-- b. The file will have no contents, it will get deleted by the Pi on boot, but it will enable SSH.
-6. Insert into RPi & Boot
-7. SSH into Pi
-```
-ssh pi@<rpi ip address>
-Sudo raspi-config
-```
-
-8. Change password
-9. Expand file system
-10. Exit Raspi-config
-11. Update
+    network={
+     scan_ssid=1
+     ssid="YourNetworkID"
+     psk="YourPassword"
+    }
+    ```
+1. Add extensionless ‘ssh’ file to your SD card
+    1. Create a file called `ssh` with no extension on your SD card
+    1. The file will have no contents, it will get deleted by the Pi on boot, but it will enable SSH.
+1. Insert into RPi & Boot
+1. SSH into Pi
+    ```
+    ssh pi@<rpi ip address>
+    Sudo raspi-config
+    ```
+1. Change password
+1. Expand file system
+1. Exit Raspi-config
+1. Update
 ```
 Sudo apt-get update
 ```

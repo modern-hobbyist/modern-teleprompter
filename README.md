@@ -32,93 +32,109 @@ The case serves multiple purposes. It holds the electronics and glass panel, it 
 1. Add extensionless ‘ssh’ file to your SD card
     1. Create a file called `ssh` with no extension on your SD card
     1. The file will have no contents, it will get deleted by the Pi on boot, but it will enable SSH.
-1. Insert into RPi & Boot
-1. SSH into Pi
+1. Insert SD Card into RPi & Boot
+    1. This will boot the Pi into a headless version of Raspbian, connect to the WiFi and enable SSH.
+1. SSH into the Pi
     ```
     ssh pi@<rpi ip address>
+    ```
+1. Configure Raspbian
+    ```
     Sudo raspi-config
     ```
-1. Change password
-1. Expand file system
-1. Exit Raspi-config
-1. Update
-```
-Sudo apt-get update
-```
-12. Install PHP
-```
-Sudo apt-get install php
-```
-13. Install mbstring, dom (xml) and curl extensions
-```
-Sudo apt-get install php-mbstring php7.3-dom php-curl php-mysql
-```
-- 1. Y to continue
-- 2. Might need to change the version of dom extension you install to match the newest version of php.
-14. Install composer
-```
-curl -sS https://getcomposer.org/installer | php
-sudo mv composer.phar /usr/local/bin/composer
-```
-15. Install mysql
-```
-sudo apt-get install mariadb-server mariadb-client -y
-```
-16. Enter Mysql prompt
-```
-Sudo mysql -u root -p
-```
-- 1. Password: root
-17. Configure Mysql user
-```
-CREATE USER 'homestead'@'localhost' IDENTIFIED BY 'secret';
-GRANT ALL PRIVILEGES ON * . * TO ‘homestead’@'localhost';
-FLUSH PRIVILEGES;
-Quit;
-```
-18. Setup Mysql databases
-```
-Mysql -u homestead -p 
-```
-- 1. Password: secret
-```
-CREATE SCHEMA teleprompter;
-exit;
-```
-19. Install Git
-```
-Sudo apt-get install git
-```
-20. Clone the repo
-```
-Git clone https://github.com/csteamengine/teleprompter.git
-```
-21. Cd into the repo
-22. Install Composer
-```
-Composer install
-```
-- 1. Composer update takes too much processing power and would take ages on the pi, so make sure to run this on your development machine and just do install on the pi.
-23. Create the .env file
-```
-Cp .env.example to .env
-```
-24. Clear application cache
-```
-Php artisan config:clear
-```
-25. Migrate and seed databases
-```
-Php artisan migrate --seed
-```
-26. Get Pi IP address
-```
-Hostname -I
-```
-27. Run the server
-```
-php artisan serve --host=YOUR-PI-IP
-```
+    1. Change password
+    1. Expand file system
+    1. Exit Raspi-config
+1. Update apt-get
+    ```
+    Sudo apt-get update
+    ```
+1. Install PHP
+    ```
+    Sudo apt-get install php
+    ```
+1. Install mbstring, dom (xml), curl and mysql extensions
+    ```
+    Sudo apt-get install php-mbstring php7.3-dom php-curl php-mysql
+    ```
+    1. Y to continue
+    1. Might need to change the version of dom extension you install to match the newest version of php.
+1. Install composer
+    ```
+    curl -sS https://getcomposer.org/installer | php
+    sudo mv composer.phar /usr/local/bin/composer
+    ```
+1. Install mysql
+    ```
+    sudo apt-get install mariadb-server mariadb-client -y
+    ```
+1. Enter Mysql prompt
+    ```
+    Sudo mysql -u root -p
+    ```
+    1. Password: root
+1. Configure Mysql user
+    ```
+    CREATE USER 'teleprompter_u'@'localhost' IDENTIFIED BY 'secret';
+    GRANT ALL PRIVILEGES ON * . * TO ‘teleprompter_u’@'localhost';
+    FLUSH PRIVILEGES;
+    Quit;
+    ```
+1. Log in to new 
+    ```
+    Mysql -u teleprompter_u -p 
+    ```
+    1. Password: secret
+    ```
+    CREATE SCHEMA teleprompter;
+    exit;
+    ```
+1. Install Git
+    ```
+    Sudo apt-get install git
+    ```
+1. Clone the repo
+    ```
+    Git clone https://github.com/csteamengine/teleprompter.git
+    ```
+1. Cd into the repo
+    ```
+    cd ~/ModernPrompter
+    ```
+1. Install Composer
+    ```
+    Composer install
+    ```
+    1. Composer update takes too much processing power and would take ages on the pi, so make sure to run this on your development machine and just do install on the pi.
+1. Create the .env file
+    ```
+    cp .env.example to .env
+    ```
+1. Set the MySQL User credentials
+    ```
+    DB_CONNECTION=mysql
+    DB_HOST=localhost
+    DB_PORT=3306
+    DB_DATABASE=teleprompter
+    DB_USERNAME=teleprompter_u
+    DB_PASSWORD=secret
+    ```
+1. Clear application cache
+    ```
+    Php artisan config:clear
+    ```
+1. Migrate and seed databases
+    ```
+    Php artisan migrate --seed
+    ```
+1. Get Pi IP address
+    ```
+    Hostname -I
+    ```
+1. Run the server
+    ```
+    php artisan serve --host=YOUR-PI-IP
+    ```
 
 ## Auto Boot Setup
 1. Update apt-get

@@ -18,7 +18,7 @@ class HomeController extends Controller
     public function index()
     {
         $transcripts = Transcript::all();
-        return view('frontend.index')->with(['transcripts' => $transcripts]);
+        return view('frontend.index')->with(['transcripts' => $transcripts, 'ip' => request()->ip()]);
     }
 
     /**

@@ -34,43 +34,45 @@ The case serves multiple purposes. It holds the electronics and glass panel, it 
     1. The file will have no contents, it will get deleted by the Pi on boot, but it will enable SSH.
 1. Insert SD Card into RPi & Boot
     1. This will boot the Pi into a headless version of Raspbian, connect to the WiFi and enable SSH.
+
+### Web Server & MySQL Setup
 1. SSH into the Pi
     ```
-    ssh pi@<rpi ip address>
+    $ ssh pi@<rpi ip address>
     ```
 1. Configure Raspbian
     ```
-    Sudo raspi-config
+    $ sudo raspi-config
     ```
     1. Change password
     1. Expand file system
     1. Exit Raspi-config
 1. Update apt-get
     ```
-    Sudo apt-get update
+    $ sudo apt-get update
     ```
 1. Install PHP
     ```
-    Sudo apt-get install php
+    $ sudo apt-get install php
     ```
 1. Install mbstring, dom (xml), curl and mysql extensions
     ```
-    Sudo apt-get install php-mbstring php7.3-dom php-curl php-mysql
+    $ sudo apt-get install php-mbstring php7.3-dom php-curl php-mysql
     ```
     1. Y to continue
     1. Might need to change the version of dom extension you install to match the newest version of php.
 1. Install composer
     ```
-    curl -sS https://getcomposer.org/installer | php
-    sudo mv composer.phar /usr/local/bin/composer
+    $ curl -sS https://getcomposer.org/installer | php
+    $ sudo mv composer.phar /usr/local/bin/composer
     ```
 1. Install mysql
     ```
-    sudo apt-get install mariadb-server mariadb-client -y
+    $ sudo apt-get install mariadb-server mariadb-client -y
     ```
 1. Enter Mysql prompt
     ```
-    Sudo mysql -u root -p
+    $ sudo mysql -u root -p
     ```
     1. Password: root
 1. Configure Mysql user
@@ -82,7 +84,7 @@ The case serves multiple purposes. It holds the electronics and glass panel, it 
     ```
 1. Log in to new 
     ```
-    Mysql -u teleprompter_u -p 
+    $ mysql -u teleprompter_u -p 
     ```
     1. Password: secret
     ```
@@ -91,24 +93,24 @@ The case serves multiple purposes. It holds the electronics and glass panel, it 
     ```
 1. Install Git
     ```
-    Sudo apt-get install git
+    $ sudo apt-get install git
     ```
 1. Clone the repo
     ```
-    Git clone https://github.com/csteamengine/teleprompter.git
+    $ git clone https://github.com/csteamengine/teleprompter.git
     ```
 1. Cd into the repo
     ```
-    cd ~/ModernPrompter
+    $ cd ~/ModernPrompter
     ```
 1. Install Composer
     ```
-    Composer install
+    $ composer install
     ```
     1. Composer update takes too much processing power and would take ages on the pi, so make sure to run this on your development machine and just do install on the pi.
 1. Create the .env file
     ```
-    cp .env.example to .env
+    $ cp .env.example to .env
     ```
 1. Set the MySQL User credentials
     ```
@@ -121,55 +123,85 @@ The case serves multiple purposes. It holds the electronics and glass panel, it 
     ```
 1. Clear application cache
     ```
-    Php artisan config:clear
+    $ php artisan config:clear
     ```
 1. Migrate and seed databases
     ```
-    Php artisan migrate --seed
-    ```
-1. Get Pi IP address
-    ```
-    Hostname -I
-    ```
-1. Run the server
-    ```
-    php artisan serve --host=YOUR-PI-IP
+    $ php artisan migrate --seed
     ```
 
-## Auto Boot Setup
-1. Update apt-get
-```
-sudo apt-get update
-sudo apt-get upgrade
-sudo apt-get dist-upgrade
-sudo apt-get install chromium-browser unclutter lxde
-```
-- 1. Y to continue
-2. Raspi config
-```sudo raspi-config```
-3. Boot options
-- 1. Desktop/CLI
-- 2. Desktop/Autologin
-4. Edit ~/.config/lxsession/LXDE/autostart
-```
-Sudo nano ~/.config/lxsession/LXDE/autostart
-```
-- 1. Add the following to the autostart file
-```
-@xset s off
-@xset -dpms
-@xset s noblank
-@sed -i 's/"exited_cleanly": false/"exited_cleanly": true/' ~/.config/chromium-browser Default/Preferences
-@chromium-browser --noerrdialogs --kiosk https://blockdev.io --incognito --disable-translate
-```
-- 2. Set it to the correct url http://YOURIPADDRESS:8000
-5. Configure the server to startup at boot
-- 3. Edit the .bash_profile with the following
-```
-(cd ~/Documents/teleprompter && php artisan serve --host=10.0.1.37 &)
-```
-6. Reboot
+### Auto Boot Setup
+1. Install chromium-browser
+    ```
+    $ sudo apt-get update
+    $ sudo apt-get upgrade
+    $ sudo apt-get dist-upgrade
+    $ sudo apt-get install chromium-browser unclutter lxde
+    ```
+    1. Y to continue
+1. Raspi config
+    ```
+    $ sudo raspi-config
+    ```
+    1. Enable auto login
+    ```
+    3. Boot Options -> Desktop/CLI -> Desktop/Autologin
+    ```
+    1. Finish raspi-config
+1. Edit ~/.config/lxsession/LXDE/autostart
+    ```
+    $ sudo nano ~/.config/lxsession/LXDE/autostart
+    ```
+    1. Add the following to the file
+    ```
+    @xset s off
+    @xset -dpms
+    @xset s noblank
+    @sed -i 's/"exited_cleanly": false/"exited_cleanly": true/' ~/.config/chromium-browser Default/Preferences
+    @sh /home/pi/.start_server.sh
+    ```
+1. Add ".start_server.sh" Script to /home/pi/
+    1. Create the new .sh file
+    ```
+    $ sudo nano ~/.start_server.sh
+    ```
+    1. Add the following to .start_server.sh
+    ```
+    #! /bin/bash
+    # Starts the php server for the teleprompter
+    IPADDR=$(hostname -I | awk '{print $1}')
+    (cd ~/teleprompter && php artisan serve --host=$IPADDR &)
+    
+    # Starts chrome in Kiosk mode and navigates to the local server
+    URL="http://${IPADDR}:8000"
+    DISPLAY=:0 chromium-browser --noerrdialogs --kiosk "$URL" --incognito --disable-translate
+    ```
+1. Configure the server to startup at boot
+    1. Edit the .bash_profile
+    ```
+    $ sudo nano ~/.bash_profile
+    ```
+    1. Add the following:
+    ```
+    IPADDR=$(hostname -I | awk '{print $1}')
+    URL="http://${IPADDR}:8000"
+    ```
+1. Reboot
 ```
 Sudo reboot
 ```
+
+That's it! It should now auto login to chromium and display the local laravel application hosted on port 8000.
+
+### Use the thing!
+1. To use this as a teleprompter, navigate to `<yourpi'sipaddress>:8000` in your computer's browser.
+    1. The ip address of the Pi will be displayed at the bottom of the webpage, so if you have a touchscreen connected, you can see it.
+    1. Otherwise, you can find it by checking which IP's are connected to your WiFi router or Modem.
+1. Upload files and name them
+1. Play back files by clicking the play button on the touchscreen
+1. Delete files by clicking the delete button
+### Playback
+1. The playback screen has a few limited controls that allow you to change the speed, jump to the beggining or end of the script, and pause the script.
+1. Return to the homepage by clicking the `Home` button.
+
 

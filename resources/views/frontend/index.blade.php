@@ -34,7 +34,7 @@
 @endpush
 
 @section('content')
-    <button class="btn btn-primary" id="reloadButton">Reload</button>
+    <button class="btn btn-primary" id="reloadButton" disabled>Reload</button>
     <button class="btn btn-dark" id="ipaddress">{{$ip}}</button>
     <div class="row m-5">
         <div class="col-12">

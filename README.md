@@ -13,11 +13,17 @@ The case serves multiple purposes. It holds the electronics and glass panel, it 
 ## Instructions
 ### Raspberry Pi Setup
 1. Download and install Raspbian Lite
-- a. Raspbian Lite: https://www.raspberrypi.org/downloads/raspbian/
-- b. Installation Instructions: https://www.raspberrypi.org/documentation/installation/installing-images/README.md
+ 
+   a. Raspbian Lite: https://www.raspberrypi.org/downloads/raspbian/
+ 
+   b. Installation Instructions: https://www.raspberrypi.org/documentation/installation/installing-images/README.md
+
 4. Add WPA_Supplicants.conf (to automatically connect to WiFi)
-- a. With the SD card inserted into your computer, create a file called WPA_Supplicants.conf on the SD card
-- b. Add the following to WPA_Supplicants (Replace SSID and PSK with your WiFi credentials):
+ 
+   a. With the SD card inserted into your computer, create a file called WPA_Supplicants.conf on the SD card
+ 
+   b. Add the following to WPA_Supplicants (Replace SSID and PSK with your WiFi credentials):
+
 ```
 country=us
 update_config=1

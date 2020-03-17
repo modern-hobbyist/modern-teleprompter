@@ -11,7 +11,7 @@
             left: 25px;
         }
         
-        #idaddress{
+        #ipaddress{
             position: fixed;
             bottom: 25px;
             left: 25px;

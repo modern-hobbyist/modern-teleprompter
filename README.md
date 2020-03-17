@@ -1,20 +1,37 @@
-# Modern Teleprompter
-If you've ever made a YouTube video before, or if you like watching videos on YouTube, then you've probably noticed that content creators all have different ways of recording the dialog for their videos. Some are able to make the dialog up off the top of their heads, some memorize their entire script, and some--like me-- memorize one line at a time before delivering it to the camera. All of these are great options if they work for you, but I didn't want to settle for that. I found that recording line by line was not only time consuming, but it makes for a lot of post-processing to get it playing back smoothly. In comes the teleprompter!
+# Modern Prompter
+## Background
+If you've ever made a YouTube video before, or if you like watching videos on YouTube, then you've probably noticed that content creators all have different ways of recording the dialog for their videos. Some are able to make the dialog up off the top of their heads, some memorize their entire script, and some--like me-- memorize one line at a time before delivering it to the camera. All of these are great options if they work for you, but I didn't want to settle for that. I found that recording line by line was not only time consuming, but it makes for a lot of post-processing to get it playing back smoothly.
 
-I decided to make a one-way mirror teleprompter, an invention made popular by Hubert Schlafly during the 1956 Democratic National Convention, so I could easily and smoothly record the dialog for my videos. These types of prompters work by reflecting text off a piece of glass with a camera behind it. As long as the camera side of the glass is darker than the speaker side, then the camera will see right through the glass without any glare. 
+To fix this, I decided to make a one-way mirror teleprompter, an invention made popular by Hubert Schlafly during the 1956 Democratic National Convention, so I could easily and smoothly record the dialog for my videos. These types of prompters work by reflecting text off a piece of glass with a camera behind it. As long as the camera side of the glass is darker than the speaker side, then the camera will see right through the glass without any glare. 
+
+## Overview
 
 For the brains of this project, I used an old Raspberry Pi 2 and a 7" touchscreen display. With a background in Web Development, I decided to make a Laravel website to act as the prompter software. The pi hosts the website on post 8000, so I can connect to it using any computer that's on the same network as the pi. This allows you to upload transcripts, manage them, and play them back. The playback page reverses the text and scrolls it upside down so that it can be read as it reflects off the glass. There are a few controls on this page that allow you to adjust the scroll speed, pause the text, and just to the beginning or end of the script. I configured the Pi to boot into Chromium Kiosk mode and start up the web server, and put everything into a case that I designed in Fusion360.
 
 The case serves multiple purposes. It holds the electronics and glass panel, it has a small hole that I can use to mount my iPhone to it--which I currently record with-- and it has a small square on the bottom that is compatible with my universal tripod quick-release mount. Once that finished printing, I mounted everything into the case and plugged it in--and that't it! I now have a fully functioning prompter that helps me to create better videos faster, with less post-processing.
 
-# Instructions
-Here is more detailed instructions on the Raspberry Pi setup if you are interested in copying my prompter. 
-## Raspberry Pi Setup
-1. Download raspian lite
-2. Flash to SD card
-3. Reinsert SD card
-4. Add WPA_Supplicants.conf
-5. Add extensionless ‘ssh’ file 
+## Instructions
+### Raspberry Pi Setup
+1. Download and install Raspbian Lite
+- a. Raspbian Lite: https://www.raspberrypi.org/downloads/raspbian/
+- b. Installation Instructions: https://www.raspberrypi.org/documentation/installation/installing-images/README.md
+4. Add WPA_Supplicants.conf (to automatically connect to WiFi)
+- a. With the SD card inserted into your computer, create a file called WPA_Supplicants.conf on the SD card
+- b. Add the following to WPA_Supplicants (Replace SSID and PSK with your WiFi credentials):
+```
+country=us
+update_config=1
+ctrl_interface=/var/run/wpa_supplicant
+
+network={
+ scan_ssid=1
+ ssid="YourNetworkID"
+ psk="YourPassword"
+}
+```
+5. Add extensionless ‘ssh’ file to your SD card
+- a. Create a file called `ssh` with no extension on your SD card
+- b. The file will have no contents, it will get deleted by the Pi on boot, but it will enable SSH.
 6. Insert into RPi & Boot
 7. SSH into Pi
 ```

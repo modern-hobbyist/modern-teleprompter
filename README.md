@@ -1,8 +1,39 @@
 # Modern Prompter
-## Background
 If you've ever made a YouTube video before, or if you like watching videos on YouTube, then you've probably noticed that content creators all have different ways of recording the dialog for their videos. Some are able to make the dialog up off the top of their heads, some memorize their entire script, and some--like me-- memorize one line at a time before delivering it to the camera. All of these are great options if they work for you, but I didn't want to settle for that. I found that recording line by line was not only time consuming, but it makes for a lot of post-processing to get it playing back smoothly.
 
 To fix this, I decided to make a one-way mirror teleprompter, an invention made popular by Hubert Schlafly during the 1956 Democratic National Convention, so I could easily and smoothly record the dialog for my videos. These types of prompters work by reflecting text off a piece of glass with a camera behind it. As long as the camera side of the glass is darker than the speaker side, then the camera will see right through the glass without any glare. 
+
+YouTube Video: https://www.youtube.com/watch?v=d-wVgWHPzgA
+**Don't forget to subscribe to my channel so you don't miss any new videos!**
+**[Modern Hobbyist](https://www.youtube.com/channel/UCjgA1ehfjkZ4WMa5Cw9f1LA)
+
+## Parts
+### 3d Prints
+**3d Printable Case:**
+https://www.thingiverse.com/thing:4225551
+
+**Bracket to hold display to Case**
+...
+
+### Purchased
+**Raspberry Pi 4:**
+https://amzn.to/2U5ZZwF
+(You don't need a pi 4, but that is the most recent model)
+
+**7" Touchscreen Display:**
+https://amzn.to/2xxYY8P
+
+**USB Wifi Dongle: (If you're RPi doesn't have built-in wifi)**
+https://amzn.to/2QhAUNU
+
+**D-Rings for phone mount:**
+https://amzn.to/2wY3EVi
+
+**SmartPhone mount:**
+https://amzn.to/2U8QZqC
+
+**My Cheap Tripod:**
+https://amzn.to/2IKQKwu
 
 ## Overview
 

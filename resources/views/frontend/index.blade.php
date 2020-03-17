@@ -10,6 +10,12 @@
             top: 25px;
             left: 25px;
         }
+        
+        #idaddress{
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+        }
     </style>
 @endpush
 
@@ -28,6 +34,7 @@
 
 @section('content')
     <button class="btn btn-primary" id="reloadButton">Reload</button>
+    <button class="btn btn-dark" id="ipaddress">{{$ip}}</button>
     <div class="row m-5">
         <div class="col-12">
             <div class="card">

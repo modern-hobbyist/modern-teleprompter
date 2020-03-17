@@ -15,6 +15,7 @@
             position: fixed;
             bottom: 25px;
             left: 25px;
+            z-index: 3;
         }
     </style>
 @endpush

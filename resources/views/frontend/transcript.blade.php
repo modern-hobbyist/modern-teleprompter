@@ -41,6 +41,29 @@
             }, 310/($('#speed').val()/10)*1000, "linear");
         });
 
+        $(window).keydown(function(e) {
+            if (e.which === 32) {
+
+                pause();
+
+            }
+        });
+
+        // $(window).keydown(function(e) {
+        //     if (e.keyCode == 32) {
+        //         console.log("paused");
+        //         togglePause();
+        //         return false;
+        //     }
+        // }).keyup(function(e){
+        //     if (e.keyCode == 32) {
+        //         console.log("resumed");
+        //         togglePause();
+        //     }
+        //
+        //     return false;
+        // });
+
         function updateSpeed(){
             $('html, body').clearQueue();
             $('html, body').stop();
@@ -89,20 +112,20 @@
         function pause(){
             $('html, body').clearQueue();
             $('html, body').stop();
+            paused = true;
         }
 
         function resume(){
             updateSpeed();
+            paused = false;
         }
 
         function togglePause(){
             if(paused){
                 $('#pause').html('Pause');
-                paused = false;
                 resume();
             }else{
                 $('#pause').html('Play');
-                paused = true;
                 pause();
             }
         }
@@ -134,7 +157,19 @@
             }
             else if(e.keyCode == 40) { // down
                 speedDown();
+            }else if(e.keyCode == 32 && !paused) {
+                togglePause();
+                paused = true;
             }
+            return false;
+        });
+
+        $("body").keyup(function(e) {
+            if(e.keyCode == 32 && paused) {
+                togglePause();
+                paused = false;
+            }
+            return false;
         });
     </script>
 @endpush
